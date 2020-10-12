@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+
+	<title>My page</title>
+
+	<style>
+
+		.expandable-source { height: 300px; }
+
+		.expandable-trigger:not(.expandable-trigger-collapsed) .do-the-expand { display: none; }
+		.expandable-trigger.expandable-trigger-collapsed .do-the-collapse { display: none; }
+
+	</style>
+
+</head>
+<body>
+
+<h1>jQuery expandable plugin</h1>
+
+<div class="expandable-source" data-expandable-id="test" data-expandable-height="50px">
+
+	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a odio cursus, pellentesque lorem sit amet, imperdiet quam. Suspendisse potenti. In hac habitasse platea dictumst. Mauris convallis sit amet magna id facilisis. Proin sit amet ligula varius, dapibus lacus eu, pretium tortor. Pellentesque ut malesuada eros. Quisque suscipit id libero tincidunt suscipit. Integer egestas libero sit amet ante lacinia consequat. Donec ut risus a dolor semper elementum. Donec ac ultrices purus, vitae maximus quam. Quisque nec neque eu lacus faucibus dictum. Etiam consectetur massa non aliquam congue. Mauris ac ligula sed elit venenatis commodo eu eu lacus. Cras tempus luctus est, sit amet sagittis tortor molestie placerat. Maecenas nibh erat, mattis ut pretium sagittis, viverra in diam.</p>
+
+	<p>Fusce fermentum ligula at lacus vulputate, sit amet pretium lacus condimentum. Curabitur vitae dapibus turpis. Donec id orci ligula. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Fusce sit amet vehicula magna. Donec non tincidunt ex. Cras gravida elit tortor, et pharetra urna congue sed. Curabitur tempus orci vel ante sollicitudin pulvinar. Quisque id viverra enim, sed malesuada diam. Maecenas elit lacus, pharetra nec volutpat quis, dictum et tellus.</p>
+
+	<p>Nam egestas, quam ut pretium luctus, sem eros efficitur tellus, ac mattis erat diam vel neque. Phasellus laoreet, quam ac consequat pretium, orci odio volutpat tellus, ac lacinia odio nulla at dolor. Pellentesque commodo elit mauris, ut vulputate nulla scelerisque ac. Mauris non dui sit amet arcu pellentesque dictum. Aenean eu sollicitudin orci. Nam placerat nulla id metus luctus fringilla. Cras lacinia, odio nec congue luctus, risus purus iaculis odio, in aliquam lorem velit ac ex. Aenean quis massa quam. Nunc mattis sapien in vulputate facilisis.</p>
+
+	<p>Mauris eget gravida purus, vitae pulvinar erat. Morbi dapibus ipsum id enim eleifend, et suscipit sem mattis. Nulla pellentesque pretium nisl. Fusce ipsum justo, pharetra eget felis ac, consectetur bibendum mi. Maecenas rutrum sem metus, id bibendum quam ultrices et. Sed eget placerat tortor. Donec aliquet libero lorem, sit amet gravida metus consequat sit amet. Mauris lacinia semper porttitor. Integer placerat placerat dolor at commodo. Curabitur id ligula justo. Ut quis est venenatis, ornare mi et, tempus tortor. Mauris congue diam sed varius vestibulum. Praesent sagittis neque vel dui venenatis, a tincidunt erat fermentum. Vivamus rhoncus lectus urna, at consequat enim semper vel.</p>
+
+	<p>Aenean est purus, sollicitudin vel malesuada vel, laoreet vitae dui. Donec tempor, magna at blandit placerat, sem nunc fermentum turpis, eget luctus odio elit sit amet quam. In mattis viverra elit, et congue dui. Vestibulum efficitur, quam ac placerat consequat, ligula mi maximus sem, et mollis ipsum nisi ut nulla. Aliquam erat volutpat. Nulla vel finibus nunc. Maecenas quis velit aliquam ex convallis bibendum eu et tortor. Maecenas posuere pretium leo, congue tristique sem feugiat et. Nullam id felis justo. Nullam at leo varius, pulvinar purus at, viverra libero. Sed cursus ultrices nisi non ultricies. Fusce quis convallis massa. Quisque et efficitur purus. Praesent elit libero, viverra in arcu et, imperdiet lobortis lacus. Proin gravida porttitor tortor sit amet ultricies. In hac habitasse platea dictumst.</p>
+
+</div>
+
+<br>
+
+<div class="expandable-trigger" data-expandable-target="test">
+	<a href="#"><span class="do-the-expand">Expand &gt;</span><span class="do-the-collapse">Collapse &lt;</span></a>
+</div>
+
+<p>Pressing `expand` allows you to expand the text.</p>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="expandable.js"></script>
+
+</body>
+</html>
