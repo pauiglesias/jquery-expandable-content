@@ -41,12 +41,25 @@
 		const id = $(this).data('expandable-id');
 		const $triggers = $('.expandable-trigger[data-expandable-target="' + id + '"]');
 
+		$triggers.each(function() {
+			const textTag  = $(this).data('expandable-html-tag') || 'span';
+			const textMore = $(this).attr('data-expandable-html-more');
+			const textLess = $(this).data('expandable-html-less');
+			if (!textMore) {
+				const innerElements = $(this).find(textTag);
+				if (innerElements && innerElements.length) {
+					$(this).attr('data-expandable-html-more', $(innerElements[0]).html());
+				}
+			}
+		});
+
 		// Collapse
 		if (!settings.expand) {
 
 			if (settings.heightCheck && this[0].scrollHeight <= parseInt(settings.height)) {
 				this.addClass('expandable-source-none').removeClass(['expandable-source-collapsed', 'expandable-source-expanded']);
 				$triggers.each(function() {
+					$(this).css('display', 'none');
 					$(this).addClass('expandable-trigger-none').removeClass(['expandable-trigger-collapsed', 'expandable-trigger-expanded']);
 				});
 				return this;
@@ -56,6 +69,8 @@
 			this.css('max-height', settings.height);
 			this.addClass('expandable-source-collapsed').removeClass(['expandable-source-expanded', 'expandable-source-none']);
 			$triggers.each(function() {
+				$(this).css('display', '');
+				$(this).html($(this).data('expandable-html-more'));
 				$(this).addClass('expandable-trigger-collapsed').removeClass(['expandable-trigger-expanded', 'expandable-trigger-none']);
 			});
 
@@ -65,6 +80,8 @@
 			this.css('max-height', this[0].scrollHeight + 'px');
 			this.removeClass(['expandable-source-collapsed', 'expandable-source-none']).addClass('expandable-source-expanded');
 			$triggers.each(function() {
+				$(this).css('display', '');
+				$(this).html($(this).data('expandable-html-less'));
 				$(this).removeClass(['expandable-trigger-collapsed', 'expandable-trigger-none']).addClass('expandable-trigger-expanded');
 			});
 		}
