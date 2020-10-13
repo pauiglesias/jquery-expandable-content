@@ -10,7 +10,10 @@
 			expand				: this.hasClass('expandable-source-collapsed'),
 
 			// Height
-			maxHeight			: this.data('expandable-height') || '250px',
+			height				: this.data('expandable-height') || '250px',
+
+			// Check min height
+			heightCheck			: (this.data('expandable-height-check') !== false),
 
 			// Animations
 			collapseDuration	: this.data('expandable-collapse-duration')   || '.25s',
@@ -40,20 +43,29 @@
 
 		// Collapse
 		if (!settings.expand) {
+
+			if (settings.heightCheck && this[0].scrollHeight <= parseInt(settings.height)) {
+				this.addClass('expandable-source-none').removeClass(['expandable-source-collapsed', 'expandable-source-expanded']);
+				$triggers.each(function() {
+					$(this).addClass('expandable-trigger-none').removeClass(['expandable-trigger-collapsed', 'expandable-trigger-expanded']);
+				});
+				return this;
+			}
+
 			this.css('transition', (settings.collapseDuration && settings.collapseAnimation) ? 'max-height ' + settings.collapseDuration + ' ' + settings.collapseAnimation : '');
-			this.css('max-height', settings.maxHeight);
-			this.addClass('expandable-source-collapsed').removeClass('expandable-source-expanded');
+			this.css('max-height', settings.height);
+			this.addClass('expandable-source-collapsed').removeClass(['expandable-source-expanded', 'expandable-source-none']);
 			$triggers.each(function() {
-				$(this).addClass('expandable-trigger-collapsed').removeClass('expandable-trigger-expanded');
+				$(this).addClass('expandable-trigger-collapsed').removeClass(['expandable-trigger-expanded', 'expandable-trigger-none']);
 			});
 
 		// Expand
 		} else {
 			this.css('transition', (settings.expansionDuration && settings.expansionAnimation) ? 'max-height ' + settings.expansionDuration + ' ' + settings.expansionAnimation : '');
 			this.css('max-height', this[0].scrollHeight + 'px');
-			this.removeClass('expandable-source-collapsed').addClass('expandable-source-expanded');
+			this.removeClass(['expandable-source-collapsed', 'expandable-source-none']).addClass('expandable-source-expanded');
 			$triggers.each(function() {
-				$(this).removeClass('expandable-trigger-collapsed').addClass('expandable-trigger-expanded');
+				$(this).removeClass(['expandable-trigger-collapsed', 'expandable-trigger-none']).addClass('expandable-trigger-expanded');
 			});
 		}
 
