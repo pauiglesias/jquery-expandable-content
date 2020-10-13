@@ -4,11 +4,11 @@
 	$.fn.expandable = function(options) {
 
 		const settings = $.extend({
-			expanded: this.hasClass('expandable-source-collapsed'),
+			expanded: !this.hasClass('expandable-source-collapsed'),
 			maxHeight: this.data('expandable-height') || '250px',
-			collapseDuration: this.data('expandable-collapse-duration' || '.25s'),
+			collapseDuration: this.data('expandable-collapse-duration') || '.35s',
 			collapseAnimation: this.data('expandable-collapse-animation') || 'ease-out',
-			expansionDuration: this.data('expandable-expansion-duration' || '.25s'),
+			expansionDuration: this.data('expandable-expansion-duration') || '2.50s',
 			expansionAnimation: this.data('expandable-expansion-animation') || 'ease-out'
 		}, options);
 
@@ -18,7 +18,8 @@
 		this.css('height', 'auto');
 		this.css('overflow', 'hidden');
 
-		if (!settings.expanded) {
+		// Collapse
+		if (settings.expanded) {
 			this.css('max-height', settings.maxHeight);
 			this.css('transition', 'max-height ' + settings.collapseDuration + ' ' + settings.collapseAnimation);
 			this.addClass('expandable-source-collapsed').removeClass('expandable-source-expanded');
@@ -26,6 +27,7 @@
 				$(this).addClass('expandable-trigger-collapsed').removeClass('expandable-trigger-expanded');
 			});
 
+		// Expand
 		} else {
 			this.css('transition', 'max-height ' + settings.expansionDuration + ' ' + settings.expansionAnimation);
 			this.css('max-height', this[0].scrollHeight + 'px');
