@@ -26,9 +26,16 @@
 
 		}, options);
 
+		// Triggers for this source
+		const id = $(this).data('expandable-id');
+		const $triggers = $('.expandable-trigger[data-expandable-target="' + id + '"]');
+
 		// Media query exception
 		if (!settings.expand && settings.mediaQuery && window.matchMedia) {
 			if (!window.matchMedia(settings.mediaQuery).matches) {
+				$triggers.each(function() {
+					$(this).css('cssText', 'display:none!important');
+				});
 				return this;
 			}
 		}
@@ -37,10 +44,7 @@
 		this.css('height', 'auto');
 		this.css('overflow', 'hidden');
 
-		// Check source triggers
-		const id = $(this).data('expandable-id');
-		const $triggers = $('.expandable-trigger[data-expandable-target="' + id + '"]');
-
+		// Handle more text
 		$triggers.each(function() {
 			const textTag  = $(this).data('expandable-html-tag') || 'span';
 			const textMore = $(this).attr('data-expandable-html-more');
@@ -59,7 +63,7 @@
 			if (settings.heightCheck && this[0].scrollHeight <= parseInt(settings.height)) {
 				this.addClass('expandable-source-none').removeClass(['expandable-source-collapsed', 'expandable-source-expanded']);
 				$triggers.each(function() {
-					$(this).css('display', 'none');
+					$(this).css('cssText', 'display:none!important');
 					$(this).addClass('expandable-trigger-none').removeClass(['expandable-trigger-collapsed', 'expandable-trigger-expanded']);
 				});
 				return this;
